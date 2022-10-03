@@ -33,6 +33,10 @@ export async function createPlace(place) {
     return await client.from('places').insert(place).single();
 }
 
+export async function getPlaces() {
+    return await client.from('places').select('*').limit(200);
+}
+
 /* Storage Functions */
 
 export async function uploadImage(bucketName, imagePath, imageFile) {
