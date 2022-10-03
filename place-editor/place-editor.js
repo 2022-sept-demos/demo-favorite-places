@@ -1,6 +1,6 @@
 /* Imports */
 import '../auth/user.js';
-import { uploadImage } from '../fetch-utils.js';
+import { createPlace, uploadImage } from '../fetch-utils.js';
 
 /* Get DOM Elements */
 const placeForm = document.getElementById('place-form');
@@ -34,9 +34,22 @@ placeForm.addEventListener('submit', async (e) => {
 
     const url = await uploadImage('images', imagePath, imageFile);
 
-    console.log('uploaded', url);
+    const place = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+        category: formData.get('category'),
+        image_url: url,
+    };
 
+    const response = await createPlace(place);
+    error = response.error;
     addButton.disabled = false;
+
+    if (error) {
+        displayError();
+    } else {
+        location.assign('/');
+    }
 });
 
 /* Display Functions */

@@ -29,6 +29,10 @@ export async function signOutUser() {
 
 /* Data functions */
 
+export async function createPlace(place) {
+    return await client.from('places').insert(place).single();
+}
+
 /* Storage Functions */
 
 export async function uploadImage(bucketName, imagePath, imageFile) {
