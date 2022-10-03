@@ -1,0 +1,7 @@
+.preview {
+    height: 154px;
+    width: 225px;
+    object-fit: cover;
+    border: 1px solid var(--placeholder-color);
+    background: white;
+}
