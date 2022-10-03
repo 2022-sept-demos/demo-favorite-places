@@ -2,6 +2,13 @@ main {
     padding-top: 0;
 }
 
+#search-form {
+    position: sticky;
+    top: 80px;
+    padding-top: 10px;
+    display: flex;
+}
+
 #error-display {
     color: red;
 }

@@ -7,6 +7,7 @@ import { renderPlace } from './render-utils.js';
 /* Get DOM Elements */
 const errorDisplay = document.getElementById('error-display');
 const placeList = document.getElementById('place-list');
+const searchForm = document.getElementById('search-form');
 
 /* State */
 let error = null;
@@ -21,6 +22,23 @@ window.addEventListener('load', async () => {
     if (error) {
         displayError();
     } else {
+        displayPlaces();
+    }
+});
+
+searchForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(searchForm);
+    const name = formData.get('name');
+
+    const response = await getPlaces(name);
+    error = response.error;
+
+    if (error) {
+        displayError();
+    } else {
+        places = response.data;
         displayPlaces();
     }
 });
