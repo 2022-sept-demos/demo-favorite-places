@@ -29,6 +29,10 @@ placeForm.addEventListener('submit', async (e) => {
     const formData = new FormData(placeForm);
 
     const imageFile = formData.get('image');
+    if (imageFile.size > 1000000) {
+        alert('file is too big, must be < 10KB');
+        return;
+    }
     const randomFolder = Math.floor(Date.now() * Math.random());
     const imagePath = `places/${randomFolder}/${imageFile.name}`;
 

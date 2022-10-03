@@ -37,7 +37,7 @@ export async function getPlaces(name) {
     let query = client.from('places').select('*').limit(200);
 
     if (name) {
-        query.ilike('name', `%${name}%`);
+        query = query.ilike('name', `%${name}%`);
     }
 
     return await query;
