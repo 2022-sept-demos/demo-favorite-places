@@ -1,4 +1,4 @@
-# Pet Lovers Supabase: Multi-page CRUD Add/List
+# Place Lovers Supabase: List/Detail and related data
 
 ## The Golden Rule:
 
