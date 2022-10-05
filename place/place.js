@@ -1,8 +1,8 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import '../auth/user.js';
-import { createComment, getPlace } from '../fetch-utils.js';
-import { renderComment } from '../render-utils.js';
+// import { createComment, getPlace } from '../fetch-utils.js';
+// import { renderComment } from '../render-utils.js';
 
 /* Get DOM Elements */
 const errorDisplay = document.getElementById('error-display');
@@ -17,49 +17,7 @@ let error = null;
 let place = null;
 
 /* Events */
-window.addEventListener('load', async () => {
-    const searchParams = new URLSearchParams(location.search);
-    const id = searchParams.get('id');
-
-    // TODO: no id
-
-    const response = await getPlace(id);
-    error = response.error;
-    place = response.data;
-
-    if (error) {
-        displayError();
-    }
-
-    if (!place) {
-        //  No place associated with this id, redirect
-        location.assign('/');
-    } else {
-        displayPlace();
-        displayComments();
-    }
-});
-
-addCommentForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(addCommentForm);
-    const commentInsert = {
-        place_id: place.id,
-        text: formData.get('text'),
-    };
-
-    const response = await createComment(commentInsert);
-    error = response.error;
-    const comment = response.data;
-
-    if (error) {
-        displayError();
-    } else {
-        addCommentForm.reset();
-        place.comments.unshift(comment);
-        displayComments();
-    }
-});
+window.addEventListener('load', async () => {});
 
 /* Display Functions */
 
@@ -83,7 +41,5 @@ function displayPlace() {
 function displayComments() {
     commentList.innerHTML = '';
     for (const comment of place.comments) {
-        const commentEl = renderComment(comment);
-        commentList.append(commentEl);
     }
 }

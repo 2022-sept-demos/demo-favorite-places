@@ -1,6 +1,9 @@
 export function renderPlace(place) {
     const li = document.createElement('li');
 
+    const a = document.createElement('a');
+    a.href = `/place/?id=${place.id}`;
+
     const img = document.createElement('img');
     img.src = place.image_url;
 
@@ -13,7 +16,8 @@ export function renderPlace(place) {
     const p = document.createElement('p');
     p.textContent = place.description;
 
-    li.append(img, h2, p);
+    a.append(img, h2, p);
+    li.append(a);
 
     return li;
 }

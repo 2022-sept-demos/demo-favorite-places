@@ -35,17 +35,6 @@ main {
     margin: 0;
 }
 
-#add-comment-form {
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr 100px;
-    align-items: end;
-}
-
-#add-comment-form input {
-    height: 45px;
-}
-
 #comment-list li {
     background: var(--header-background);
     padding: 20px 25px;

@@ -7,6 +7,8 @@ main {
     top: 80px;
     padding-top: 10px;
     display: flex;
+    width: 500px;
+    grid-template-columns: 100px 40px !important;
 }
 
 #error-display {
@@ -23,6 +25,17 @@ main {
 li {
     background: var(--offset-color);
     box-shadow: var(--box-shadow);
+    transition: box-shadow 250ms ease-out;
+}
+
+li:hover {
+    box-shadow: var(--box-shadow-hover);
+}
+
+li a {
+    text-decoration: none;
+    color: initial;
+    cursor: pointer;
 }
 
 li h2,
