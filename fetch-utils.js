@@ -44,7 +44,34 @@ export async function getPlaces(name) {
 }
 
 export async function getPlace(id) {
-    return await client.from('places').select('*').eq('id', id).single();
+    return await client
+        .from('places')
+        .select('*, comments(*)')
+        .eq('id', id)
+        .single();
+}
+
+const obj = {
+    id: 3,
+    name: 'Spooky Halloween',
+    description: 'description',
+    created_at: 'timestamp',
+    image_url: 'https://',
+    category: 'nature',
+    user_id: '32fd3-343gv67',
+    comments: [
+        {
+            id: 23,
+            created_at: 'timestamp',
+            text: 'this is my comment',
+            user_id: '34ff3_34f',
+            place_id: 3,
+        },
+    ],
+};
+
+export async function createComment(comment) {
+    return client.from('comments').insert(comment).single();
 }
 
 /* Storage Functions */

@@ -29,3 +29,9 @@ function getCategoryEmoji(category) {
     if (category === 'dining') return '🥗';
     return '❓';
 }
+
+export function renderComment(comment) {
+    const li = document.createElement('li');
+    li.textContent = comment.text;
+    return li;
+}

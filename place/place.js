@@ -1,7 +1,8 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import '../auth/user.js';
-import { getPlace } from '../fetch-utils.js';
+import { createComment, getPlace } from '../fetch-utils.js';
+import { renderComment } from '../render-utils.js';
 // import { createComment, getPlace } from '../fetch-utils.js';
 // import { renderComment } from '../render-utils.js';
 
@@ -35,6 +36,27 @@ window.addEventListener('load', async () => {
         location.replace('/');
     } else {
         displayPlace();
+        displayComments();
+    }
+});
+
+addCommentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(addCommentForm);
+    const insertComment = {
+        text: formData.get('text'),
+        place_id: place.id,
+    };
+
+    const response = await createComment(insertComment);
+    error = response.error;
+    if (error) {
+        displayError();
+    } else {
+        const comment = response.data;
+        place.comments.push(comment);
+        displayComments();
+        addCommentForm.reset();
     }
 });
 
@@ -60,6 +82,7 @@ function displayPlace() {
 function displayComments() {
     commentList.innerHTML = '';
     for (const comment of place.comments) {
-        //
+        const commentEl = renderComment(comment);
+        commentList.append(commentEl);
     }
 }
