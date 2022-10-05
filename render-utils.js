@@ -30,8 +30,11 @@ function getCategoryEmoji(category) {
     return '❓';
 }
 
-export function renderComment(comment) {
+export function renderComment(comment, userId) {
     const li = document.createElement('li');
+    if (comment.user_id === userId) {
+        li.classList.add('self');
+    }
     li.textContent = comment.text;
     return li;
 }

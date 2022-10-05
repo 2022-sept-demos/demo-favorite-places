@@ -1,7 +1,7 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import '../auth/user.js';
-import { createComment, getPlace } from '../fetch-utils.js';
+import { createComment, getPlace, getUser } from '../fetch-utils.js';
 import { renderComment } from '../render-utils.js';
 // import { createComment, getPlace } from '../fetch-utils.js';
 // import { renderComment } from '../render-utils.js';
@@ -17,6 +17,8 @@ const addCommentForm = document.getElementById('add-comment-form');
 /* State */
 let error = null;
 let place = null;
+
+const user = getUser();
 
 /* Events */
 window.addEventListener('load', async () => {
@@ -82,7 +84,7 @@ function displayPlace() {
 function displayComments() {
     commentList.innerHTML = '';
     for (const comment of place.comments) {
-        const commentEl = renderComment(comment);
+        const commentEl = renderComment(comment, user.id);
         commentList.append(commentEl);
     }
 }
