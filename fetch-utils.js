@@ -43,6 +43,10 @@ export async function getPlaces(name) {
     return await query;
 }
 
+export async function getPlace(id) {
+    return await client.from('places').select('*').eq('id', id).single();
+}
+
 /* Storage Functions */
 
 export async function uploadImage(bucketName, imagePath, imageFile) {

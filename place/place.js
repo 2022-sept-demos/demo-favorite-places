@@ -1,6 +1,7 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import '../auth/user.js';
+import { getPlace } from '../fetch-utils.js';
 // import { createComment, getPlace } from '../fetch-utils.js';
 // import { renderComment } from '../render-utils.js';
 
@@ -8,7 +9,7 @@ import '../auth/user.js';
 const errorDisplay = document.getElementById('error-display');
 const placeName = document.getElementById('place-name');
 const placeImage = document.getElementById('place-image');
-const placeBio = document.getElementById('place-bio');
+const placeDescription = document.getElementById('place-description');
 const commentList = document.getElementById('comment-list');
 const addCommentForm = document.getElementById('add-comment-form');
 
@@ -17,7 +18,25 @@ let error = null;
 let place = null;
 
 /* Events */
-window.addEventListener('load', async () => {});
+window.addEventListener('load', async () => {
+    const searchParams = new URLSearchParams(location.search);
+    const id = searchParams.get('id');
+
+    if (!id) {
+        location.replace('/');
+        return;
+    }
+
+    const response = await getPlace(id);
+    error = response.error;
+    place = response.data;
+
+    if (error) {
+        location.replace('/');
+    } else {
+        displayPlace();
+    }
+});
 
 /* Display Functions */
 
@@ -33,7 +52,7 @@ function displayError() {
 
 function displayPlace() {
     placeName.textContent = place.name;
-    placeBio.textContent = place.bio;
+    placeDescription.textContent = place.description;
     placeImage.src = place.image_url;
     placeImage.alt = `${place.name} image`;
 }
@@ -41,5 +60,6 @@ function displayPlace() {
 function displayComments() {
     commentList.innerHTML = '';
     for (const comment of place.comments) {
+        //
     }
 }
