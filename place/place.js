@@ -54,7 +54,7 @@ addCommentForm.addEventListener('submit', async (e) => {
         displayError();
     } else {
         const comment = response.data;
-        place.comments.push(comment);
+        place.comments.unshift(comment);
         displayComments();
         addCommentForm.reset();
     }

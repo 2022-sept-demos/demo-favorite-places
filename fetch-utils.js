@@ -48,6 +48,7 @@ export async function getPlace(id) {
         .from('places')
         .select('*, comments(*)')
         .eq('id', id)
+        .order('created_at', { foreignTable: 'comments', ascending: false })
         .single();
 }
 
